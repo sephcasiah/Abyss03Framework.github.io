@@ -3,8 +3,272 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Abyss03 Nexus — Home</title>
+  <title>Abyss03 Nexus — Dust 514 Server Core</title>
+  <meta name="description" content="Abyss03 Nexus — Dust 514 Server Core: capture, replay, preserve.">
   <link rel="stylesheet" href="theme-abyss03.css">
+  <style>
+    :root{
+      --bg: #0a0a0b;
+      --fg: #f0f2f3;
+      --muted: #b7bcc2;
+      --accent: #c82828;
+      --accent-2: #ec4040;
+      --divider: #2a2b30;
+      --panel: rgba(20,20,24,0.92);
+      --panel-2: rgba(16,16,19,0.92);
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0; font-family: system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, Arial, 'Noto Sans', 'Liberation Sans', sans-serif;
+      color:var(--fg);
+      background: #000 url('https://web.ccpgamescdn.com/dust/img/layout/bg_dusty.jpg') center top/cover no-repeat fixed;
+    }
+    a{color:#fff; text-decoration:none; border-bottom:1px solid transparent}
+    a:hover{border-color:var(--accent)}
+    .backdrop::before{
+      content:""; position:fixed; inset:0; background:radial-gradient(60% 40% at 50% 0%, rgba(200,40,40,0.12), rgba(0,0,0,0) 50%);
+      pointer-events:none; z-index:-1;
+    }
+    header{
+      background: linear-gradient(180deg, rgba(0,0,0,.75), rgba(0,0,0,.35)),
+                  url('themes/themes/ccpEveOnline/share-bg.png') center/auto repeat;
+      border-bottom:1px solid var(--divider);
+     position:relative;}
+    .container{max-width:1080px; margin:0 auto; padding:0 12px}
+    .title{padding:22px 0 6px; display:flex; align-items:center; gap:14px; flex-wrap:wrap}
+    .title h1{margin:0; font-size: clamp(20px, 3.6vw, 36px); letter-spacing:.5px}
+    .tag{display:inline-block; padding:2px 10px; border:1px solid var(--divider); border-radius:999px; font-size:12px; color:var(--muted)}
+    .badge{display:flex; align-items:center; gap:10px; margin:8px 0 16px}
+    .badge img{height:70px}
+    .hero{display:grid; grid-template-columns: 1.2fr 1fr; gap:18px; padding:0 0 18px}
+    .card{background:var(--panel); border:1px solid var(--divider); border-radius:14px; padding:18px}
+    .card h2{margin:0 0 10px; font-size:clamp(16px,2.2vw,22px)}
+    .muted{color:var(--muted)}
+    .btn{display:inline-block; padding:10px 14px; background: var(--accent); color:#fff; border-radius:10px; font-weight:600}
+    .btn:hover{background: var(--accent-2)}
+    .grid{display:grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap:16px; margin:18px 0}
+    .panel{background:var(--panel-2); border:1px solid var(--divider); border-radius:14px; padding:18px}
+    .section-head{display:flex; align-items:center; gap:10px; margin-bottom:8px;
+      background: url('themes/themes/ccpEveOnline/sectionHeaderBG.png') left center/auto no-repeat; padding-left:36px; min-height:28px}
+    .list{margin:0 0 0 18px}
+    .kbd{font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, 'Liberation Mono', monospace; background:#000; color:#e7e7e7; padding:2px 6px; border-radius:6px; border:1px solid #2b2b2f}
+    footer{border-top:1px solid var(--divider); background:rgba(0,0,0,.5)}
+    .footer-inner{display:flex; align-items:center; gap:12px; padding:14px 16px}
+    .footer-inner img{height:70px}
+    .footer-text{color:var(--muted)}
+    .legal{color:#9a9fa6; font-size:12px; padding:0 16px 16px}
+  
+    .wordmark{
+      position:relative;
+      display:inline-block;
+      text-transform:uppercase;
+      letter-spacing:.12em;
+      font-weight:800;
+      font-size: clamp(24px, 5vw, 44px);
+      line-height:1;
+      color:#f2f3f5;
+      text-shadow:
+        0 1px 0 rgba(0,0,0,0.85),
+        0 0 2px rgba(255,255,255,0.35),
+        0 0 10px rgba(200,40,40,0.35),
+        0 0 18px rgba(236,64,64,0.30);
+    }
+    .wordmark .nexus{ color:#e03636; letter-spacing:.08em; text-shadow: 0 0 8px rgba(224,54,54,0.45) }
+    .wordmark::after{
+      content:"";
+      position:absolute;
+      left:0; right:0; bottom:-10px;
+      height:3px;
+      background:linear-gradient(90deg, rgba(255,255,255,0.0), #d03030 15%, #ff4b4b 55%, rgba(255,255,255,0.0));
+      box-shadow: 0 0 14px rgba(255,75,75,0.55), 0 0 24px rgba(255,75,75,0.25);
+    }
+    .claimline{
+      margin-top:14px;
+      font-size:clamp(12px, 1.6vw, 14px);
+      letter-spacing:.2em;
+      text-transform:uppercase;
+      color:#b9bdc3;
+    }
+
+
+    header::before{
+      content:"";
+      position:absolute;
+      top:0; left:0; right:0; bottom:0;
+      pointer-events:none;
+      background: repeating-linear-gradient(
+        to bottom,
+        rgba(255,255,255,0.025) 0px,
+        rgba(255,255,255,0.025) 1px,
+        transparent 1px,
+        transparent 3px
+      );
+      mix-blend-mode: overlay;
+      opacity:0.2;
+    }
+
+
+    .wordmark{
+      text-shadow:
+        0 0 3px rgba(255,255,255,0.35),
+        0 0 14px rgba(200,40,40,0.45),
+        0 2px 2px rgba(0,0,0,0.9);
+    }
+
+
+    header::before{
+      content:"";
+      position:absolute;
+      inset:0;
+      pointer-events:none;
+      background:
+        repeating-linear-gradient(
+          to bottom,
+          rgba(255,255,255,0.04) 0px,
+          rgba(255,255,255,0.04) 1px,
+          rgba(0,0,0,0) 3px,
+          rgba(0,0,0,0) 4px
+        ),
+        radial-gradient(120% 60% at 50% -20%, rgba(255,255,255,0.06), rgba(0,0,0,0) 60%);
+      mix-blend-mode: overlay;
+    }
+    header{ position:relative; }
+
+
+    .topnav{
+      display:flex; align-items:center; justify-content:space-between;
+      gap:16px; padding:10px 0 4px; margin-bottom:4px;
+      border-bottom:1px solid var(--divider);
+    }
+    .topnav .brand{
+      font-weight:800; letter-spacing:.08em; text-transform:uppercase;
+      color:#fff; border:none;
+    }
+    .topnav .brand:hover{ color:#fff; opacity:.9 }
+    .topnav .links{ display:flex; gap:14px; flex-wrap:wrap }
+    .topnav a{ color:#ddd; font-weight:600; border-bottom:1px solid transparent; }
+    .topnav a:hover{ color:#fff; border-color:var(--accent) }
+
+
+    .panel, .card{
+      position:relative;
+      overflow:hidden;
+    }
+    .panel::before, .card::before{
+      content:""; position:absolute; top:0; left:0;
+      width:22px; height:3px;
+      background: linear-gradient(90deg, var(--accent), rgba(255,255,255,0));
+      transform: translateY(10px) rotate(-45deg);
+      opacity:.75; pointer-events:none;
+    }
+    .panel::after, .card::after{
+      content:""; position:absolute; bottom:0; right:0;
+      width:22px; height:3px;
+      background: linear-gradient(90deg, rgba(255,255,255,0), var(--accent));
+      transform: translateY(-10px) rotate(-45deg);
+      opacity:.65; pointer-events:none;
+    }
+
+
+    .panel:hover, .card:hover{
+      box-shadow: 0 10px 26px rgba(224,58,58,0.12), 0 0 1px rgba(255,255,255,0.06) inset;
+      transform: translateY(-1px);
+      transition: transform .15s ease, box-shadow .2s ease;
+    }
+
+
+    a:focus-visible, button:focus-visible{
+      outline:2px solid var(--accent); outline-offset:3px;
+      border-radius:6px;
+    }
+
+
+    .topnav { position: relative; }
+    .topnav .links a{
+      position:relative; padding:8px 2px;
+    }
+    .topnav .links a::after{
+      content:""; position:absolute; left:0; right:100%; bottom:-6px; height:2px;
+      background: var(--accent);
+      transition: right .22s ease;
+      box-shadow: 0 0 10px rgba(224,58,58,.35);
+    }
+    .topnav .links a:hover::after,
+    .topnav .links a:focus-visible::after{ right:0 }
+    .topnav .links a.active{ color:#e7b815; }
+
+
+    @keyframes activePulseGold {
+      0% { box-shadow: 0 0 0 rgba(231,184,21,0); }
+      50% { box-shadow: 0 0 14px rgba(231,184,21,0.55), 0 0 24px rgba(231,184,21,0.35); }
+      100% { box-shadow: 0 0 0 rgba(231,184,21,0); }
+    }
+    .topnav .links a.active::after{
+      right:0;
+    }
+
+
+    .hamburger{
+      display:none; position:relative; width:36px; height:28px; border:1px solid var(--divider);
+      border-radius:8px; background:rgba(0,0,0,.35); cursor:pointer;
+    }
+    .hamburger span, .hamburger::before, .hamburger::after{
+      content:""; position:absolute; left:7px; right:7px; height:2px; background:#ddd; border-radius:2px;
+      transition: transform .2s ease, top .2s ease, opacity .2s ease;
+    }
+    .hamburger span{ top:13px }
+    .hamburger::before{ top:8px }
+    .hamburger::after{ top:18px }
+    .hamburger.active::before{ top:13px; transform: rotate(45deg) }
+    .hamburger.active::after{ top:13px; transform: rotate(-45deg) }
+    .hamburger.active span{ opacity:0 }
+
+    @media (max-width: 840px){
+      .topnav{ gap:10px }
+      .topnav .links{ display:none; flex-direction:column; align-items:flex-start; gap:10px; padding:10px 0 }
+      .topnav.open .links{ display:flex }
+      .hamburger{ display:block }
+    }
+
+
+    .icon{
+      display:inline-block; width:16px; height:16px; margin-right:8px;
+      background-size: contain; background-repeat:no-repeat; vertical-align: -2px;
+      filter: drop-shadow(0 0 4px rgba(224,58,58,.25));
+    }
+    .icon-bullet{ background-image: url('themes/themes/ccpEveOnline/bullet.png'); }
+
+
+    @keyframes activePulse {
+
+      0% { box-shadow: 0 0 0 rgba(224,58,58,0); }
+      50% { box-shadow: 0 0 14px var(--glow-weak), 0 0 24px var(--glow-weak); }
+      100% { box-shadow: 0 0 0 rgba(224,58,58,0); }
+    }
+
+
+    @keyframes activePulseGold {
+      0% { box-shadow: 0 0 0 rgba(231,184,21,0); }
+      50% { box-shadow: 0 0 14px rgba(231,184,21,0.55), 0 0 24px rgba(231,184,21,0.35); }
+      100% { box-shadow: 0 0 0 rgba(231,184,21,0); }
+    }
+    .topnav .links a.active::after{
+      right:0;
+      background:#e7b815; animation: activePulseGold 2.8s ease-in-out infinite;
+    }
+
+
+    @keyframes riseIn {
+      from { opacity: 0; transform: translateY(8px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    .animate-in { opacity: 0; animation: riseIn .45s ease forwards; }
+    .animate-in.delay-1 { animation-delay: .06s; }
+    .animate-in.delay-2 { animation-delay: .12s; }
+    .animate-in.delay-3 { animation-delay: .18s; }
+    .animate-in.delay-4 { animation-delay: .24s; }
+</style>
 </head>
 <body class="backdrop">
   <header>
