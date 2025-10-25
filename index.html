@@ -3,8 +3,26 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Abyss03 Nexus — Home</title>
+  <title>Abyss03 Nexus — Homer</title>
   <link rel="stylesheet" href="theme-abyss03.css">
+  <style>
+    .tabs {display:flex;gap:12px;margin-bottom:16px;}
+    .tabs button {padding:8px 16px;border:none;border-radius:6px;cursor:pointer;background:#222;color:#eee;}
+    .tabs button.active {background:var(--accent);color:#fff;}
+    .layout {display:grid;grid-template-columns:250px 1fr;gap:18px;}
+    .navlist {background:#111;border:1px solid var(--divider);border-radius:6px;overflow:auto;max-height:80vh;padding:5px;}
+    .navlist details {margin-bottom:8px;}
+    .navlist summary {cursor:pointer;padding:6px 10px;background:#1a1a1a;color:#ccc;font-weight:bold;border-bottom:1px solid #222;}
+    .navlist ul {list-style:none;margin:0;padding:0;}
+    .navlist li {border-bottom:1px solid var(--divider);}
+    .navlist li a {display:block;padding:6px 12px;color:#ccc;text-decoration:none;}
+    .navlist li a:hover {background:#222;color:#fff;}
+    .navlist li a.active {background:var(--accent);color:#fff;}
+    .code-block {background:#111;padding:10px;border-radius:6px;overflow:auto;font-family:ui-monospace,monospace;font-size:14px;line-height:1.4;}
+    .refresh-btn {margin-top:8px;padding:6px 10px;background:#333;color:#eee;border:1px solid #555;border-radius:4px;cursor:pointer;}
+    .refresh-btn:hover {background:#444;}
+    @media(max-width:900px){.layout{grid-template-columns:1fr}}
+  </style>
 </head>
 <body class="backdrop">
   <header>
@@ -16,7 +34,6 @@
           <a href="index.html" >Home</a>
           <a href="docs.html"><span class="icon icon-bullet"></span>Docs</a>
           <a href="api.html"><span class="icon icon-bullet"></span>API</a>
-          <a href="replay.html"><span class="icon icon-bullet"></span>Replay</a>
           <a href="health.html"><span class="icon icon-bullet"></span>Health</a>
         </div>
       </nav>
