@@ -1,0 +1,150 @@
+{
+  "/dust/server/": {
+    "serverStatus": "ONLINE",
+    "serverName": "Abyss03 Test Node",
+    "serverTime": "2025-10-01T06:26:38.628126Z",
+    "ticks": 1759299998
+  },
+  "/dust/login/": {
+    "loginStatus": "READY",
+    "authEndpoint": "/dust/login/auth/"
+  },
+  "/dust/motd/": {
+    "motd": "Welcome to Abyss03 Nexus test server."
+  },
+  "/dust/characters/": {
+    "totalCount": 1,
+    "items": [
+      {
+        "id": 980000001,
+        "name": "Test Merc"
+      }
+    ]
+  },
+  "/dust/characters/{id}/": {
+    "id": 980000001,
+    "name": "Test Merc"
+  },
+  "/dust/corporations/": {
+    "totalCount": 1,
+    "items": [
+      {
+        "id": 78000001,
+        "name": "Test Corp"
+      }
+    ]
+  },
+  "/dust/corporations/{id}/": {
+      "id": 78000001,
+      "name": "Test Corp"
+  },
+  "/dust/corporations/{id}/members/": {
+    "totalCount": 0,
+    "items": []
+  },
+  "/dust/corporations/{id}/applications/": {
+    "totalCount": 0,
+    "items": []
+  },
+  "/dust/corporations/{id}/accounts/": {
+    "totalCount": 0,
+    "items": []
+  },
+  "/dust/contracts/": {
+    "totalCount": 1,
+    "items": [
+      {
+        "id": 70000001,
+        "title": "Intro Skirmish Contract"
+      }
+    ]
+  },
+  "/dust/contracts/{id}/": {
+    "id": 70000001,
+    "title": "Intro Skirmish Contract"
+  },
+  "/dust/fittings/": {
+    "totalCount": 0,
+    "items": []
+  },
+  "/dust/alliances/": {
+    "totalCount": 0,
+    "items": []
+  },
+  "/dust/stats/": {
+    "usersTotal": 1,
+    "corpsTotal": 1,
+    "alliancesTotal": 0
+  },
+  "/crest/": {
+    "contentType": "application/vnd.ccp.eve.Api-v1+json",
+    "resources": [],
+    "serverTime": "2025-10-01T06:26:38.628151Z",
+    "ticks": 1759299998
+  },
+  "/crest/rawconfig/": {
+    "contentType": "application/vnd.ccp.eve.RawConfiguration-v1+json",
+    "config": {}
+  },
+  "/crest/user/bloodlines/": {
+    "contentType": "application/vnd.ccp.eve.BloodlineCollection-v2+json",
+    "bloodlines": []
+  },
+  "/crest/user/races/": {
+    "contentType": "application/vnd.ccp.eve.RaceCollection-v2+json",
+    "races": []
+  },
+  "/crest/user/specialties/": {
+    "contentType": "application/vnd.ccp.eve.SpecialtyCollection-v2+json",
+    "specialties": []
+  },
+  "/crest/user/portraits/": {
+    "contentType": "application/vnd.ccp.eve.PortraitCollection-v1+json",
+    "portraits": []
+  },
+  "/crest/battles/": {
+    "contentType": "application/vnd.ccp.eve.BattleCollection-v1+json",
+    "battles": []
+  },
+  "/crest/battles/{id}/": {
+    "contentType": "application/vnd.ccp.eve.Battle-v1+json",
+    "id": 1,
+    "status": "stub-running"
+  },
+  "/crest/chat/channels/": {
+    "contentType": "application/vnd.ccp.eve.ChatChannelCollection-v1+json",
+    "channels": []
+  },
+  "/crest/chat/channels/{id}/members/": {
+    "contentType": "application/vnd.ccp.eve.ChatChannelMemberCollection-v1+json",
+    "members": []
+  },
+  "/crest/chat/channels/{id}/messages/": {
+    "contentType": "application/vnd.ccp.eve.ChatChannelMessage-v1+json",
+    "messages": []
+  },
+  "/crest/market/groups/": {
+    "contentType": "application/vnd.ccp.eve.MarketGroupCollection-v1+json",
+    "groups": []
+  },
+  "/crest/market/types/": {
+    "contentType": "application/vnd.ccp.eve.MarketTypeCollection-v1+json",
+    "types": []
+  },
+  "/crest/market/prices/": {
+    "contentType": "application/vnd.ccp.eve.MarketPriceCollection-v1+json",
+    "prices": []
+  },
+  "/crest/market/orders/": {
+    "contentType": "application/vnd.ccp.eve.MarketOrderCollection-v1+json",
+    "orders": []
+  },
+  "/crest/accounting/accounts/": {
+    "contentType": "application/vnd.ccp.eve.CharacterAccounts-v2+json",
+    "accounts": []
+  },
+  "/crest/accounting/accounts/{id}/transactions/": {
+    "contentType": "application/vnd.ccp.eve.AccountTransaction-v1+json",
+    "transactions": []
+  }
+}
