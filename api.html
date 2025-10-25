@@ -10,14 +10,17 @@
     .tabs button {padding:8px 16px;border:none;border-radius:6px;cursor:pointer;background:#222;color:#eee;}
     .tabs button.active {background:var(--accent);color:#fff;}
     .layout {display:grid;grid-template-columns:250px 1fr;gap:18px;}
-    .navlist {background:#111;border:1px solid var(--divider);border-radius:6px;overflow:auto;}
-    .navlist h4 {margin:0;padding:10px;background:#1a1a1a;border-bottom:1px solid var(--divider);}
+    .navlist {background:#111;border:1px solid var(--divider);border-radius:6px;overflow:auto;max-height:80vh;padding:5px;}
+    .navlist details {margin-bottom:8px;}
+    .navlist summary {cursor:pointer;padding:6px 10px;background:#1a1a1a;color:#ccc;font-weight:bold;border-bottom:1px solid #222;}
     .navlist ul {list-style:none;margin:0;padding:0;}
     .navlist li {border-bottom:1px solid var(--divider);}
-    .navlist li a {display:block;padding:8px 12px;color:#ccc;text-decoration:none;}
+    .navlist li a {display:block;padding:6px 12px;color:#ccc;text-decoration:none;}
     .navlist li a:hover {background:#222;color:#fff;}
     .navlist li a.active {background:var(--accent);color:#fff;}
     .code-block {background:#111;padding:10px;border-radius:6px;overflow:auto;font-family:ui-monospace,monospace;font-size:14px;line-height:1.4;}
+    .refresh-btn {margin-top:8px;padding:6px 10px;background:#333;color:#eee;border:1px solid #555;border-radius:4px;cursor:pointer;}
+    .refresh-btn:hover {background:#444;}
     @media(max-width:900px){.layout{grid-template-columns:1fr}}
   </style>
 </head>
@@ -47,42 +50,74 @@
     <button id="tab-create" onclick="switchTab('create')">Character Creation</button>
   </div>
 
-  <!-- Explorer Tab -->
+
   <div id="explorer" class="layout">
     <div class="navlist">
-      <h4>Server</h4>
-      <ul><li><a href="#" data-endpoint="/dust/server/">GET /dust/server/</a></li></ul>
+      <details open><summary>Server</summary>
+        <ul><li><a href="#" data-endpoint="/dust/server/">GET /dust/server/</a></li></ul>
+      </details>
 
-      <h4>Login</h4>
-      <ul><li><a href="#" data-endpoint="/dust/login/">GET /dust/login/</a></li></ul>
+      <details><summary>Login</summary>
+        <ul><li><a href="#" data-endpoint="/dust/login/">GET /dust/login/</a></li></ul>
+      </details>
 
-      <h4>Messages</h4>
-      <ul><li><a href="#" data-endpoint="/dust/motd/">GET /dust/motd/</a></li></ul>
+      <details><summary>Messages</summary>
+        <ul><li><a href="#" data-endpoint="/dust/motd/">GET /dust/motd/</a></li></ul>
+      </details>
 
-      <h4>Characters</h4>
-      <ul>
-        <li><a href="#" data-endpoint="/dust/characters/">GET /dust/characters/</a></li>
-        <li><a href="#" data-endpoint="/dust/characters/{id}/">GET /dust/characters/{id}/</a></li>
-      </ul>
+      <details><summary>Characters</summary>
+        <ul>
+          <li><a href="#" data-endpoint="/dust/characters/">GET /dust/characters/</a></li>
+          <li><a href="#" data-endpoint="/dust/characters/{id}/">GET /dust/characters/{id}/</a></li>
+        </ul>
+      </details>
 
-      <h4>Corporations</h4>
-      <ul>
-        <li><a href="#" data-endpoint="/dust/corporations/">GET /dust/corporations/</a></li>
-        <li><a href="#" data-endpoint="/dust/corporations/{id}/">GET /dust/corporations/{id}/</a></li>
-      </ul>
+      <details><summary>Corporations</summary>
+        <ul>
+          <li><a href="#" data-endpoint="/dust/corporations/">GET /dust/corporations/</a></li>
+          <li><a href="#" data-endpoint="/dust/corporations/{id}/">GET /dust/corporations/{id}/</a></li>
+          <li><a href="#" data-endpoint="/dust/corporations/{id}/members/">GET /dust/corporations/{id}/members/</a></li>
+          <li><a href="#" data-endpoint="/dust/corporations/{id}/applications/">GET /dust/corporations/{id}/applications/</a></li>
+          <li><a href="#" data-endpoint="/dust/corporations/{id}/accounts/">GET /dust/corporations/{id}/accounts/</a></li>
+        </ul>
+      </details>
 
-      <h4>Contracts</h4>
-      <ul>
-        <li><a href="#" data-endpoint="/dust/contracts/">GET /dust/contracts/</a></li>
-        <li><a href="#" data-endpoint="/dust/contracts/{id}/">GET /dust/contracts/{id}/</a></li>
-      </ul>
+      <details><summary>Contracts</summary>
+        <ul>
+          <li><a href="#" data-endpoint="/dust/contracts/">GET /dust/contracts/</a></li>
+          <li><a href="#" data-endpoint="/dust/contracts/{id}/">GET /dust/contracts/{id}/</a></li>
+        </ul>
+      </details>
 
-      <h4>Future</h4>
-      <ul>
-        <li><a href="#" data-endpoint="/dust/fittings/">GET /dust/fittings/</a></li>
-        <li><a href="#" data-endpoint="/dust/alliances/">GET /dust/alliances/</a></li>
-        <li><a href="#" data-endpoint="/dust/stats/">GET /dust/stats/</a></li>
-      </ul>
+      <details><summary>Future</summary>
+        <ul>
+          <li><a href="#" data-endpoint="/dust/fittings/">GET /dust/fittings/</a></li>
+          <li><a href="#" data-endpoint="/dust/alliances/">GET /dust/alliances/</a></li>
+          <li><a href="#" data-endpoint="/dust/stats/">GET /dust/stats/</a></li>
+        </ul>
+      </details>
+
+      <details open><summary>CREST</summary>
+        <ul>
+          <li><a href="#" data-endpoint="/crest/">GET /crest/</a></li>
+          <li><a href="#" data-endpoint="/crest/rawconfig/">GET /crest/rawconfig/</a></li>
+          <li><a href="#" data-endpoint="/crest/user/bloodlines/">GET /crest/user/bloodlines/</a></li>
+          <li><a href="#" data-endpoint="/crest/user/races/">GET /crest/user/races/</a></li>
+          <li><a href="#" data-endpoint="/crest/user/specialties/">GET /crest/user/specialties/</a></li>
+          <li><a href="#" data-endpoint="/crest/user/portraits/">GET /crest/user/portraits/</a></li>
+          <li><a href="#" data-endpoint="/crest/battles/">GET /crest/battles/</a></li>
+          <li><a href="#" data-endpoint="/crest/battles/{id}/">GET /crest/battles/{id}/</a></li>
+          <li><a href="#" data-endpoint="/crest/chat/channels/">GET /crest/chat/channels/</a></li>
+          <li><a href="#" data-endpoint="/crest/chat/channels/{id}/members/">GET /crest/chat/channels/{id}/members/</a></li>
+          <li><a href="#" data-endpoint="/crest/chat/channels/{id}/messages/">GET /crest/chat/channels/{id}/messages/</a></li>
+          <li><a href="#" data-endpoint="/crest/market/groups/">GET /crest/market/groups/</a></li>
+          <li><a href="#" data-endpoint="/crest/market/types/">GET /crest/market/types/</a></li>
+          <li><a href="#" data-endpoint="/crest/market/prices/">GET /crest/market/prices/</a></li>
+          <li><a href="#" data-endpoint="/crest/market/orders/">GET /crest/market/orders/</a></li>
+          <li><a href="#" data-endpoint="/crest/accounting/accounts/">GET /crest/accounting/accounts/</a></li>
+          <li><a href="#" data-endpoint="/crest/accounting/accounts/{id}/transactions/">GET /crest/accounting/accounts/{id}/transactions/</a></li>
+        </ul>
+      </details>
     </div>
 
     <div>
@@ -96,67 +131,35 @@
       </div>
 
       <div class="panel">
-        <h3>Search by Name → ID</h3>
-        <input type="text" id="searchName" placeholder="Enter character or corporation name" style="width:100%;margin-bottom:8px;">
-        <button class="btn" onclick="searchName()">Search</button>
-        <pre id="searchResults" class="code-block"></pre>
-      </div>
-
-      <div class="panel">
         <h3>Example Response</h3>
+        <button class="refresh-btn" onclick="loadExamples()">↻ Refresh Examples</button>
         <pre id="example" class="code-block">Select an endpoint to see a sample response...</pre>
       </div>
+
       <div class="panel">
         <h3>Live Response</h3>
         <pre id="response" class="code-block"></pre>
       </div>
     </div>
   </div>
-
-  <!-- Character Creation Tab -->
-  <div id="create" style="display:none;">
-    <div class="panel">
-      <h3>New Character</h3>
-      <form id="createForm" onsubmit="return false;">
-        <label>Name:</label><br><input id="newName"><br>
-        <label>Bloodline:</label><br><input id="newBloodline"><br>
-        <label>Race:</label><br><input id="newRace"><br>
-        <label>Gender:</label><br><input id="newGender"><br>
-        <label>Corporation ID:</label><br><input id="newCorp"><br><br>
-        <button class="btn" onclick="createCharacter()">Create</button>
-      </form>
-    </div>
-    <div class="panel">
-      <h3>Response</h3>
-      <pre id="createResponse" class="code-block"></pre>
-    </div>
-  </div>
 </main>
 
-<footer>
-  <div class="container footer-inner">
-    <img src="abyss03_nexus_badge_dust.gif" alt="ABYSS03 NEXUS — Dust 514 Server Core badge">
-    <div class="footer-text">ABYSS03 NEXUS — capture · replay · preserve</div>
-  </div>
-</footer>
-
 <script>
-const examples = {
-  "/dust/server/": `{"serverStatus":"ONLINE","serverName":"Abyss03 Test Node"}`,
-  "/dust/login/": `{"loginStatus":"READY","authEndpoint":"/dust/login/auth/"}`,
-  "/dust/motd/": `{"motd":"Welcome to Abyss03 Nexus test server."}`,
-  "/dust/characters/": `{"totalCount":1,"items":[{"id":2106889770,"name":"Divillrii Montross"}]}`,
-  "/dust/characters/{id}/": `{"id":2106889770,"name":"Divillrii Montross"}`,
-  "/dust/corporations/": `{"totalCount":1,"items":[{"id":98342416,"name":"GNGPSTL"}]}`,
-  "/dust/corporations/{id}/": `{"id":98342416,"name":"GNGPSTL"}`,
-  "/dust/contracts/": `{"totalCount":1,"items":[{"id":70000001,"title":"Intro Skirmish Contract"}]}`,
-  "/dust/contracts/{id}/": `{"id":70000001,"title":"Intro Skirmish Contract"}`,
-  "/dust/fittings/": `{"totalCount":0,"items":[]}`,
-  "/dust/alliances/": `{"totalCount":0,"items":[]}`,
-  "/dust/stats/": `{"usersTotal":1,"corpsTotal":1,"alliancesTotal":0}`
-};
-
+let examples = {};
 let currentEndpoint = null;
+
+async function loadExamples(){
+  try {
+    const res = await fetch("endpoints.json?ts=" + Date.now());
+    examples = await res.json();
+    if(currentEndpoint){
+      document.getElementById('example').textContent = JSON.stringify(examples[currentEndpoint]||{}, null, 2);
+    }
+  } catch(err){
+    console.error("Failed to load endpoints.json", err);
+  }
+}
+document.addEventListener("DOMContentLoaded", loadExamples);
 
 document.querySelectorAll('.navlist a').forEach(link=>{
   link.addEventListener('click',e=>{
@@ -165,7 +168,7 @@ document.querySelectorAll('.navlist a').forEach(link=>{
     link.classList.add('active');
     currentEndpoint = link.dataset.endpoint;
     document.getElementById('endpoint-label').textContent = currentEndpoint;
-    document.getElementById('example').textContent = examples[currentEndpoint]||"No example available.";
+    document.getElementById('example').textContent = JSON.stringify(examples[currentEndpoint]||{"info":"No example available"}, null, 2);
     renderInputs(currentEndpoint);
   });
 });
@@ -175,7 +178,8 @@ function renderInputs(endpoint){
   container.innerHTML = "";
   if(endpoint.includes("{id}")){
     const label = endpoint.includes("characters")?"Character ID":
-                  endpoint.includes("corporations")?"Corporation ID":"Contract ID";
+                  endpoint.includes("corporations")?"Corporation ID":
+                  endpoint.includes("contracts")?"Contract ID":"ID";
     container.innerHTML = `<label>${label}:</label><br><input id="idInput"><br>`;
   }
 }
@@ -194,48 +198,6 @@ async function sendRequest(){
     document.getElementById('response').textContent = text;
   }catch(err){
     document.getElementById('response').textContent = "Error: "+err;
-  }
-}
-
-async function searchName(){
-  const name = document.getElementById('searchName').value.toLowerCase();
-  let results = [];
-  try{
-    const chars = await fetch('/dust/characters/index.json').then(r=>r.json());
-    results.push(...chars.items.filter(c=>c.name.toLowerCase().includes(name)).map(c=>`Character: ${c.name} → ID ${c.id}`));
-  }catch{}
-  try{
-    const corps = await fetch('/dust/corporations/index.json').then(r=>r.json());
-    results.push(...corps.items.filter(c=>c.name.toLowerCase().includes(name)).map(c=>`Corporation: ${c.name} → ID ${c.id}`));
-  }catch{}
-  document.getElementById('searchResults').textContent = results.join("\n")||"No matches.";
-}
-
-function switchTab(tab){
-  document.getElementById('explorer').style.display = tab==="explorer"?"grid":"none";
-  document.getElementById('create').style.display = tab==="create"?"block":"none";
-  document.getElementById('tab-explorer').classList.toggle('active',tab==="explorer");
-  document.getElementById('tab-create').classList.toggle('active',tab==="create");
-}
-
-async function createCharacter(){
-  const body = {
-    name: document.getElementById('newName').value,
-    bloodline: document.getElementById('newBloodline').value,
-    race: document.getElementById('newRace').value,
-    gender: document.getElementById('newGender').value,
-    corporation: document.getElementById('newCorp').value
-  };
-  try{
-    const res = await fetch('/dust/characters/',{
-      method:'POST',
-      headers:{'Content-Type':'application/json'},
-      body:JSON.stringify(body)
-    });
-    const text = await res.text();
-    document.getElementById('createResponse').textContent = text;
-  }catch(err){
-    document.getElementById('createResponse').textContent="Error: "+err;
   }
 }
 </script>
