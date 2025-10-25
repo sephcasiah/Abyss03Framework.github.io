@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Abyss03 Nexus — Health</title>
+  <link rel="stylesheet" href="theme-abyss03.css">
+</head>
+<body class="backdrop">
+<header>
+  <div class="container">
+    <nav class="topnav" role="navigation">
+      <button class="hamburger"><span></span></button>
+      <a href="index.html" class="brand">Abyss03 Nexus</a>
+      <div class="links">
+        <a href="index.html">Home</a>
+        <a href="docs.html">Docs</a>
+        <a href="captures.html">Captures</a>
+        <a href="api.html">API</a>
+        <a href="health.html" class="active">Health</a>
+      </div>
+    </nav>
+    <div class="title">
+      <div class="wordmark">ABYSS03 <span class="nexus">NEXUS</span></div>
+      <div class="claimline">Dust 514 Server Core</div>
+    </div>
+  </div>
+</header>
+
+<main class="container">
+  <div class="grid">
+    <div class="panel">
+      <div class="section-head"><span class="icon icon-bullet"></span><strong>Server Runtime</strong></div>
+      <p class="muted">Uptime: <span id="uptime">--:--:--</span></p>
+      <p class="muted">Started: <span id="starttime">YYYY-MM-DD HH:MM</span></p>
+    </div>
+
+    <div class="panel">
+      <div class="section-head"><span class="icon icon-bullet"></span><strong>Population</strong></div>
+      <ul class="muted list">
+        <li>Total Users: <span id="users-total">0</span></li>
+        <li>Active Users: <span id="users-active">0</span></li>
+        <li>Total Corporations: <span id="corps-total">0</span></li>
+        <li>Active Corporations: <span id="corps-active">0</span></li>
+        <li>Total Alliances: <span id="alliances-total">0</span></li>
+        <li>Active Alliances: <span id="alliances-active">0</span></li>
+      </ul>
+    </div>
+  </div>
+</main>
+
+<footer>
+  <div class="container footer-inner">
+    <img src="abyss03_nexus_badge_dust.gif" alt="ABYSS03 NEXUS — Dust 514 Server Core badge">
+    <div class="footer-text">ABYSS03 NEXUS — capture · replay · preserve</div>
+  </div>
+</footer>
+
+<script>
+// Simple runtime placeholder
+const start = new Date();
+document.getElementById('starttime').textContent = start.toLocaleString();
+setInterval(()=>{
+  const now = new Date();
+  const diff = new Date(now - start);
+  const h = String(diff.getUTCHours()).padStart(2,'0');
+  const m = String(diff.getUTCMinutes()).padStart(2,'0');
+  const s = String(diff.getUTCSeconds()).padStart(2,'0');
+  document.getElementById('uptime').textContent = `${h}:${m}:${s}`;
+}, 1000);
+</script>
+</body>
+</html>

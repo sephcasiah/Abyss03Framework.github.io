@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Abyss03 Nexus — API Explorer</title>
+  <link rel="stylesheet" href="theme-abyss03.css">
+  <style>
+    .tabs {display:flex;gap:12px;margin-bottom:16px;}
+    .tabs button {padding:8px 16px;border:none;border-radius:6px;cursor:pointer;background:#222;color:#eee;}
+    .tabs button.active {background:var(--accent);color:#fff;}
+    .layout {display:grid;grid-template-columns:250px 1fr;gap:18px;}
+    .navlist {background:#111;border:1px solid var(--divider);border-radius:6px;overflow:auto;}
+    .navlist h4 {margin:0;padding:10px;background:#1a1a1a;border-bottom:1px solid var(--divider);}
+    .navlist ul {list-style:none;margin:0;padding:0;}
+    .navlist li {border-bottom:1px solid var(--divider);}
+    .navlist li a {display:block;padding:8px 12px;color:#ccc;text-decoration:none;}
+    .navlist li a:hover {background:#222;color:#fff;}
+    .navlist li a.active {background:var(--accent);color:#fff;}
+    .code-block {background:#111;padding:10px;border-radius:6px;overflow:auto;font-family:ui-monospace,monospace;font-size:14px;line-height:1.4;}
+    @media(max-width:900px){.layout{grid-template-columns:1fr}}
+  </style>
+</head>
+<body class="backdrop">
+<header>
+  <div class="container">
+    <nav class="topnav" role="navigation">
+      <a href="index.html" class="brand">Abyss03 Nexus</a>
+      <div class="links">
+        <a href="index.html">Home</a>
+        <a href="docs.html">Docs</a>
+        <a href="captures.html">Captures</a>
+        <a href="api.html" class="active">API</a>
+        <a href="health.html">Health</a>
+      </div>
+    </nav>
+    <div class="title">
+      <div class="wordmark">ABYSS03 <span class="nexus">NEXUS</span></div>
+      <div class="claimline">Dust 514 Server Core — API Explorer</div>
+    </div>
+  </div>
+</header>
+
+<main class="container">
+  <div class="tabs">
+    <button id="tab-explorer" class="active" onclick="switchTab('explorer')">Explorer</button>
+    <button id="tab-create" onclick="switchTab('create')">Character Creation</button>
+  </div>
+
+  <!-- Explorer Tab -->
+  <div id="explorer" class="layout">
+    <div class="navlist">
+      <h4>Server</h4>
+      <ul><li><a href="#" data-endpoint="/dust/server/">GET /dust/server/</a></li></ul>
+
+      <h4>Login</h4>
+      <ul><li><a href="#" data-endpoint="/dust/login/">GET /dust/login/</a></li></ul>
+
+      <h4>Messages</h4>
+      <ul><li><a href="#" data-endpoint="/dust/motd/">GET /dust/motd/</a></li></ul>
+
+      <h4>Characters</h4>
+      <ul>
+        <li><a href="#" data-endpoint="/dust/characters/">GET /dust/characters/</a></li>
+        <li><a href="#" data-endpoint="/dust/characters/{id}/">GET /dust/characters/{id}/</a></li>
+      </ul>
+
+      <h4>Corporations</h4>
+      <ul>
+        <li><a href="#" data-endpoint="/dust/corporations/">GET /dust/corporations/</a></li>
+        <li><a href="#" data-endpoint="/dust/corporations/{id}/">GET /dust/corporations/{id}/</a></li>
+      </ul>
+
+      <h4>Contracts</h4>
+      <ul>
+        <li><a href="#" data-endpoint="/dust/contracts/">GET /dust/contracts/</a></li>
+        <li><a href="#" data-endpoint="/dust/contracts/{id}/">GET /dust/contracts/{id}/</a></li>
+      </ul>
+
+      <h4>Future</h4>
+      <ul>
+        <li><a href="#" data-endpoint="/dust/fittings/">GET /dust/fittings/</a></li>
+        <li><a href="#" data-endpoint="/dust/alliances/">GET /dust/alliances/</a></li>
+        <li><a href="#" data-endpoint="/dust/stats/">GET /dust/stats/</a></li>
+      </ul>
+    </div>
+
+    <div>
+      <div class="panel">
+        <h3>Endpoint</h3>
+        <form id="apiForm" onsubmit="return false;">
+          <div><label><b>URL:</b> <span id="endpoint-label">Select an endpoint</span></label></div>
+          <div id="input-fields"></div>
+          <button class="btn" onclick="sendRequest()">Send</button>
+        </form>
+      </div>
+
+      <div class="panel">
+        <h3>Search by Name → ID</h3>
+        <input type="text" id="searchName" placeholder="Enter character or corporation name" style="width:100%;margin-bottom:8px;">
+        <button class="btn" onclick="searchName()">Search</button>
+        <pre id="searchResults" class="code-block"></pre>
+      </div>
+
+      <div class="panel">
+        <h3>Example Response</h3>
+        <pre id="example" class="code-block">Select an endpoint to see a sample response...</pre>
+      </div>
+      <div class="panel">
+        <h3>Live Response</h3>
+        <pre id="response" class="code-block"></pre>
+      </div>
+    </div>
+  </div>
+
+  <!-- Character Creation Tab -->
+  <div id="create" style="display:none;">
+    <div class="panel">
+      <h3>New Character</h3>
+      <form id="createForm" onsubmit="return false;">
+        <label>Name:</label><br><input id="newName"><br>
+        <label>Bloodline:</label><br><input id="newBloodline"><br>
+        <label>Race:</label><br><input id="newRace"><br>
+        <label>Gender:</label><br><input id="newGender"><br>
+        <label>Corporation ID:</label><br><input id="newCorp"><br><br>
+        <button class="btn" onclick="createCharacter()">Create</button>
+      </form>
+    </div>
+    <div class="panel">
+      <h3>Response</h3>
+      <pre id="createResponse" class="code-block"></pre>
+    </div>
+  </div>
+</main>
+
+<footer>
+  <div class="container footer-inner">
+    <img src="abyss03_nexus_badge_dust.gif" alt="ABYSS03 NEXUS — Dust 514 Server Core badge">
+    <div class="footer-text">ABYSS03 NEXUS — capture · replay · preserve</div>
+  </div>
+</footer>
+
+<script>
+const examples = {
+  "/dust/server/": `{"serverStatus":"ONLINE","serverName":"Abyss03 Test Node"}`,
+  "/dust/login/": `{"loginStatus":"READY","authEndpoint":"/dust/login/auth/"}`,
+  "/dust/motd/": `{"motd":"Welcome to Abyss03 Nexus test server."}`,
+  "/dust/characters/": `{"totalCount":1,"items":[{"id":2106889770,"name":"Divillrii Montross"}]}`,
+  "/dust/characters/{id}/": `{"id":2106889770,"name":"Divillrii Montross"}`,
+  "/dust/corporations/": `{"totalCount":1,"items":[{"id":98342416,"name":"GNGPSTL"}]}`,
+  "/dust/corporations/{id}/": `{"id":98342416,"name":"GNGPSTL"}`,
+  "/dust/contracts/": `{"totalCount":1,"items":[{"id":70000001,"title":"Intro Skirmish Contract"}]}`,
+  "/dust/contracts/{id}/": `{"id":70000001,"title":"Intro Skirmish Contract"}`,
+  "/dust/fittings/": `{"totalCount":0,"items":[]}`,
+  "/dust/alliances/": `{"totalCount":0,"items":[]}`,
+  "/dust/stats/": `{"usersTotal":1,"corpsTotal":1,"alliancesTotal":0}`
+};
+
+let currentEndpoint = null;
+
+document.querySelectorAll('.navlist a').forEach(link=>{
+  link.addEventListener('click',e=>{
+    e.preventDefault();
+    document.querySelectorAll('.navlist a').forEach(l=>l.classList.remove('active'));
+    link.classList.add('active');
+    currentEndpoint = link.dataset.endpoint;
+    document.getElementById('endpoint-label').textContent = currentEndpoint;
+    document.getElementById('example').textContent = examples[currentEndpoint]||"No example available.";
+    renderInputs(currentEndpoint);
+  });
+});
+
+function renderInputs(endpoint){
+  const container = document.getElementById('input-fields');
+  container.innerHTML = "";
+  if(endpoint.includes("{id}")){
+    const label = endpoint.includes("characters")?"Character ID":
+                  endpoint.includes("corporations")?"Corporation ID":"Contract ID";
+    container.innerHTML = `<label>${label}:</label><br><input id="idInput"><br>`;
+  }
+}
+
+async function sendRequest(){
+  if(!currentEndpoint) return;
+  let url = currentEndpoint;
+  if(url.includes("{id}")){
+    const idVal = document.getElementById('idInput').value;
+    if(!idVal){alert("Please enter an ID");return;}
+    url = url.replace("{id}",idVal);
+  }
+  try{
+    const res = await fetch(url);
+    const text = await res.text();
+    document.getElementById('response').textContent = text;
+  }catch(err){
+    document.getElementById('response').textContent = "Error: "+err;
+  }
+}
+
+async function searchName(){
+  const name = document.getElementById('searchName').value.toLowerCase();
+  let results = [];
+  try{
+    const chars = await fetch('/dust/characters/index.json').then(r=>r.json());
+    results.push(...chars.items.filter(c=>c.name.toLowerCase().includes(name)).map(c=>`Character: ${c.name} → ID ${c.id}`));
+  }catch{}
+  try{
+    const corps = await fetch('/dust/corporations/index.json').then(r=>r.json());
+    results.push(...corps.items.filter(c=>c.name.toLowerCase().includes(name)).map(c=>`Corporation: ${c.name} → ID ${c.id}`));
+  }catch{}
+  document.getElementById('searchResults').textContent = results.join("\n")||"No matches.";
+}
+
+function switchTab(tab){
+  document.getElementById('explorer').style.display = tab==="explorer"?"grid":"none";
+  document.getElementById('create').style.display = tab==="create"?"block":"none";
+  document.getElementById('tab-explorer').classList.toggle('active',tab==="explorer");
+  document.getElementById('tab-create').classList.toggle('active',tab==="create");
+}
+
+async function createCharacter(){
+  const body = {
+    name: document.getElementById('newName').value,
+    bloodline: document.getElementById('newBloodline').value,
+    race: document.getElementById('newRace').value,
+    gender: document.getElementById('newGender').value,
+    corporation: document.getElementById('newCorp').value
+  };
+  try{
+    const res = await fetch('/dust/characters/',{
+      method:'POST',
+      headers:{'Content-Type':'application/json'},
+      body:JSON.stringify(body)
+    });
+    const text = await res.text();
+    document.getElementById('createResponse').textContent = text;
+  }catch(err){
+    document.getElementById('createResponse').textContent="Error: "+err;
+  }
+}
+</script>
+</body>
+</html>
